@@ -72,11 +72,13 @@
                         <h6>Filter</h6>
                       </li>
 
-                     
-  <li >
-    <a class="dropdown-item " href="#">Type</a>
-    
-  </li>
+                             
+  
+  <li><a  class="dropdown-item" href="#">Type</a></li>
+     
+      
+   
+  
 
 
                     
@@ -111,8 +113,9 @@
                 </div>
               </div>
               <!-- End Equipments Card -->
+            
 <!-- displaying equipments-->
-<table class="table">
+<table class="table" >
   <thead>
 <tr>
   <th>ID</th>

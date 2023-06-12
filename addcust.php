@@ -8,10 +8,11 @@
         die('Connection failed: ' . $conn->connect_error); 
     }
     $type = $_POST['type'];
-    $brand = $_POST['brand']; 
-    $model = $_POST['model'];
-    $ip=$_POST['ip'];
-    $client= $_POST['client'];
+    $name = $_POST['name']; 
+    $email = $_POST['email'];
+    $number=$_POST['tel'];
+    $address=$_POST['address'];
+    
     $password = md5($_POST['password']);
 
     $select = "SELECT * FROM registration WHERE password='$password'";
@@ -20,7 +21,7 @@
     if (mysqli_num_rows($result) ==0) {
         echo "Password does not match";
     } else {
-        $insert = "INSERT INTO equipments (type, brand, model,IPaddress, client) VALUES ('$type', '$brand', '$model','$ip', '$client')";
+        $insert = "INSERT INTO customers (type, name, email,num,address) VALUES ('$type', '$name', '$email','$number','$address')";
         $result=mysqli_query($conn, $insert);
         if(!$result){
             echo "invalid query";
@@ -28,8 +29,8 @@
         }
         
         echo "<script>
-        alert('Added equipment');
-        window.location.href='equipments.php';
+        alert('Added customer');
+        window.location.href='customers.php';
         </script>";
        
         exit();

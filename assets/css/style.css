@@ -28,6 +28,7 @@ a:hover {
   color: #717ff5;
   text-decoration: none;
 }
+
 .sub-menu:hover .types-menu {
   display: block;
 }
@@ -46,6 +47,10 @@ h6 {
 }
 h3{
   color: #012970;
+}
+input[type="checkbox"]
+{
+    vertical-align:middle;
 }
 
 /*--------------------------------------------------------------

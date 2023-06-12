@@ -142,7 +142,7 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div>
-                <a  href="./customers.html"  >
+                <a  href="./customers.php"  >
                 <div class="card-body">
                   <h5 class="card-title">Customers <span>| This Year</span></h5>
 
@@ -151,8 +151,19 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                      <h6>
+                      <?php 
+                       $conn = new mysqli('localhost', 'root', '', 'stage01');
+                       if ($conn->connect_error) {
+                           die('Connection failed: ' . $conn->connect_error); // Added die() to terminate the script
+                       }
+                       $select = "SELECT * FROM customers";
+                        $result = mysqli_query($conn, $select);
+                        $data=mysqli_num_rows($result);
+                        echo $data;
+                      ?></h6>
+                      </h6>
+                      <span class="text-danger small pt-1 fw-bold">#%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
                     </div>
                   </div>
