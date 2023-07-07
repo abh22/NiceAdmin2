@@ -652,6 +652,8 @@ input[type="checkbox"]
   }
 }
 
+
+
 @media (max-width: 1199px) {
   .toggle-sidebar .sidebar {
     left: 0;

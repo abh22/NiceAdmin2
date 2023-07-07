@@ -66,7 +66,7 @@
       
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -97,7 +97,7 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div>
-                <a  href="./equipments.php"  >
+                
                 <div class="card-body">
                   <h5 class="card-title">Equipments <span>| Total</span></h5>
 
@@ -121,7 +121,7 @@
                     </div>
                   </div>
                 </div>
-              </a>
+              
               </div>
             </div><!-- End Equipments Card -->
 
@@ -142,7 +142,7 @@
                     <li><a class="dropdown-item" href="#">This Year</a></li>
                   </ul>
                 </div>
-                <a  href="./customers.php"  >
+                <!-- <a  href="./customers.php"  > -->
                 <div class="card-body">
                   <h5 class="card-title">Customers <span>| This Year</span></h5>
 
@@ -167,7 +167,7 @@
 
                     </div>
                   </div>
-                </a>
+                <!-- </a> -->
                 </div>
               </div>
 
@@ -265,8 +265,9 @@
     </section>
 
   </main><!-- End #main -->
-
-  <div id="footer"></div>
+  <div class="col-lg-8">
+       
+  <div id="footer"></div></div>
 
 </body>
 
