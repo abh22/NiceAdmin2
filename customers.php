@@ -73,9 +73,12 @@ if (!$result) {
                         <li class="dropdown-header text-start">
                             <h6>Edit</h6>
                         </li>
-                        <li><a class="dropdown-item" href="#">Update info</a></li>
+                        
+                        <li><a class="dropdown-item" href="updateCust.php?id=<?php echo $row['id']?>" >Update info</a></li>
+
                         <li><a style="color: rgb(191, 4, 4);" class="dropdown-item" href="#" name="delete" onclick="confirmDelete(<?php echo $row['id']; ?>)">Delete</a></li>
-                    </ul>
+                    
+                  </ul>
                 </div>
                 <a href="./customers.html" target="_blank">
                     <div class="card-body">
@@ -139,60 +142,7 @@ $conn->close();
                   
                   <!-- End customers Card -->
                   
-                  <!-- adding customer form-->
-                  <form id="addcust" style="padding: 50px;" action="addcust.php" method="post" class="row g-3 needs-validation" novalidate>
-                    <h3 style="color: blue;">Add customer</h3>
-                    <div class="col-8" >
-                      <label for="customer type" class="form-label">Customer type</label>
-                      <div style="display:flex;">
-                      <div class="form-check" >
-  <input class="form-check-input" type="checkbox" name=type[] value="" id="flexCheckDefault">
-  <label  class="form-check-label" for="flexCheckDefault">
-   Association
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" name=type[] value="" id="flexCheckChecked" >
-  <label  class="form-check-label" for="flexCheckChecked">
-   Individual
-  </label>
-</div></div>
-                      <div class="invalid-feedback">Please, enter the customer type!</div>
-                    </div>
-
-                    <div class="col-8">
-                      <label for="name" class="form-label">Name</label>
-                      <input type="text" name="name" placeholder="Example: ATB" class="form-control" id="name" required>
-                      
-                    </div>
-
-                    <div class="col-8">
-                      <label for="Email" class="form-label">Email</label>
-                      <div class="input-group has-validation">
-                        
-                        <input type="email" name="email" class="form-control" id="ref" required>
-                        <div class="invalid-feedback">Please insert an email.</div>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                        <label for="yourPassword" class="form-label">Contact number</label>
-                        <input type="tel" name="tel" class="form-control" id="tel" required>
-                        <div class="invalid-feedback">Please confirm the contact number</div>
-                      </div>
-                      <div class="col-8">
-                      <label for="address" class="form-label">Address</label>
-                      <input type="text" name="address" class="form-control" id="address" required>
-                      <div class="invalid-feedback">Please enter an address </div>
-                    </div>
-                    <div class="col-8">
-                      <label for="yourPassword" class="form-label">Your Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password </div>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-primary w-40" name="add" type="submit">Add customer</button>
-                      </div>
-                      </form>
+                  
             </div>
           </div>
           <div class="col-lg-4">
@@ -204,6 +154,7 @@ $conn->close();
         </div>
     </section>
     </main>
-    <div id="footer"></div>
+    <div class="col-lg-8">
+    <div id="footer"></div></div>
 </body>
 </html>
