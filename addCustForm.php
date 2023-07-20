@@ -59,8 +59,31 @@
 
                     <div class="col-8">
                       <label for="name" class="form-label">Name</label>
-                      <input type="text" name="name" placeholder="Example: ATB" class="form-control" id="name" required>
-                      
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      <option selected>--</option>
+                      <?php
+      $conn = new mysqli('localhost', 'root', '', 'stage01');
+      if ($conn->connect_error) {
+          die('Connection failed: ' . $conn->connect_error); 
+      }
+
+     
+
+      // read all row from database table
+$sql = "SELECT * FROM customers";
+$result = mysqli_query($conn,$sql);
+
+      if (!$result) {
+  die("Invalid query: " . $connection->error);
+}
+
+      // read data of each row
+while($row = $result->fetch_assoc()) {
+  echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
+}
+        $conn->close();
+        ?>
+    </select>
                     </div>
 
                     <div class="col-8">
@@ -82,9 +105,14 @@
                       <div class="invalid-feedback">Please enter an address </div>
                     </div>
                     <div class="col-8">
-                      <label for="yourPassword" class="form-label">Your Password</label>
+                      <label for="yourPassword" class="form-label">Login</label>
+                      <input type="text" name="login" class="form-control" id="log" required>
+                      <div class="invalid-feedback">Please enter your login </div>
+                    </div>
+                    <div class="col-8">
+                      <label for="yourPassword" class="form-label"> Password</label>
                       <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password </div>
+                      <div class="invalid-feedback">Please enter password </div>
                     </div>
                     <div class="col-12">
                         <button class="btn btn-primary w-40" name="add" type="submit">Add customer</button>

@@ -56,47 +56,56 @@
               >
                 <h3 style="color: blue">Add equipment</h3>
                 <div class="col-8">
-                  <label for="Equipment type" class="form-label"
-                    >Equipment type</label
-                  >
-                  <input
-                    type="text"
-                    name="type"
-                    placeholder="Router,Switcher.."
-                    class="form-control"
-                    id="equiptype"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please, enter the equipment type!
-                  </div>
-                </div>
+                      <label for="name" class="form-label">Equipment type</label>
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      <option value="1">Router</option>
+                      <option value="2">Switch</option>
+    </select>
+    </div>
+    <div class="col-8">
+                      <label for="name" class="form-label">Brand</label>
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      
+                      
+                <?php
+      $conn = new mysqli('localhost', 'root', '', 'stage01');
+      if ($conn->connect_error) {
+          die('Connection failed: ' . $conn->connect_error); 
+      }
 
-                <div class="col-8">
-                  <label for="Brand" class="form-label">Brand</label>
-                  <input
-                    type="text"
-                    name="brand"
-                    placeholder="Example: Cisco"
-                    class="form-control"
-                    id="yourEmail"
-                    required
-                  />
-                </div>
+     
 
-                <div class="col-8">
-                  <label for="Model" class="form-label">Model</label>
-                  <div class="input-group has-validation">
-                    <input
-                      type="text"
-                      name="model"
-                      class="form-control"
-                      id="ref"
-                      required
-                    />
-                    <div class="invalid-feedback">Please insert a Model.</div>
-                  </div>
-                </div>
+      // read all row from database table
+$sql = "SELECT DISTINCT brand FROM equipments";
+$result = mysqli_query($conn,$sql);
+$sql1 = "SELECT DISTINCT model FROM equipments";
+$result1 = mysqli_query($conn,$sql1);
+
+      if (!$result) {
+  die("Invalid query: " . $connection->error);
+}
+
+      // read data of each row
+while($row = $result->fetch_assoc()) {
+  echo "<option value='" . $row["id"] . "'>" . $row["brand"] . "</option>";
+}
+  echo "</select>";
+  echo '<div class="col-8">';
+ echo '<label for="name" class="form-label">Model</label>';
+ echo ' <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="model" id="model">';
+ while($row1 = $result1->fetch_assoc()) {
+  echo "<option value='" . $row1["id"] . "'>" . $row1["model"] . "</option>";}
+  echo '</select>';
+    
+
+
+        $conn->close();
+        ?>
+                
+
+
+
+              
                 <div class="col-8">
                   <label for="ip" class="form-label"
                     >IP address</label
@@ -126,19 +135,16 @@
                   </div>
                 </div>
                 <div class="col-8">
-                  <label for="yourPassword" class="form-label"
-                    >Password</label
-                  >
-                  <input
-                    type="password"
-                    name="password"
-                    class="form-control"
-                    id="yourPassword"
-                    required
-                  />
-                  <div class="invalid-feedback">Please enter  password</div>
-                </div>
-                <div class="col-8">
+                      <label for="yourPassword" class="form-label">Login</label>
+                      <input type="text" name="login" class="form-control" id="log" required>
+                      <div class="invalid-feedback">Please enter your login </div>
+                    </div>
+                    <div class="col-8">
+                      <label for="yourPassword" class="form-label"> Password</label>
+                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <div class="invalid-feedback">Please enter password </div>
+                    </div>
+                <div class="col-12">
                   <button class="btn btn-primary w-40" name="add" type="submit">
                     Add Equipment
                   </button>

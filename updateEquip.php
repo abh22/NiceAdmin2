@@ -21,20 +21,24 @@ $brand=$row["brand"];
 $model=$row["model"];
 $ipAddress=$row["IPaddress"];
 $client=$row["client"];
+echo "1";
 } else {
-$type=$POST["type"];
-$brand=$POST["brand"];
-$model=$POST["model"];
-$ipAddress=$POST["IPaddress"];
-$client=$POST["client"];
+$id=$_GET["id"];
+$type=$_POST["type"];
+$brand=$_POST["brand"];
+$model=$_POST["model"];
+$ipAddress=$_POST["ip"];
+$client=$_POST["client"];
+echo "2";
 do{
     if(empty($id) || empty($type) || empty($brand) || empty($model) || empty($ipAddress) || empty($client)){
         echo "Missing required field";
         break;
     }
-    $sql="UPDATE equipments". 
-    "SET type= '$type', brand='$brand', model='$model', IPaddress='$ipAddress', client='$client' ". 
-    "WHERE id=$id";
+    echo "$id $type $brand $model";
+    $sql="UPDATE equipments 
+    SET type= '$type', brand='$brand', model='$model', IPaddress='$ipAddress', client='$client' 
+    WHERE id=$id ";
     
     $result = mysqli_query($conn,$sql);
     if(!$result){
@@ -76,7 +80,7 @@ class="main"
 
   id="addequip"
   style="padding: 100px"
-  action="addequip.php"
+  
   method="post"
   class="row g-3 needs-validation"
   novalidate
