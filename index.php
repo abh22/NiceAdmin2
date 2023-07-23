@@ -39,7 +39,11 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.min.css">
+  
+ <script>
   $(function(){
     $("#header").load("header.html");
     $("#side").load("sidebar.html");
@@ -194,66 +198,171 @@
                   <h5 class="card-title">Reports <span>/Today</span></h5>
 
                   <!-- Line Chart -->
+                  <!-- <div id="reportsChart"></div> -->
+
+                 
                   <div id="reportsChart"></div>
 
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      <?php
+      $conn = new mysqli('localhost', 'root', '', 'stage01');
+      if ($conn->connect_error) {
+          die('Connection failed: ' . $conn->connect_error);
+      }
 
-                </div>
+      //count customers
+      $sqlCustCountsByMonth = "
+      SELECT
+      month,
+      cust_count AS count_in_month,
+      SUM(cust_count) OVER (ORDER BY month) AS cumulative_count
+    FROM
+      (
+        SELECT
+          DATE_FORMAT(subscriptionDate, '%Y-%m') AS month,
+          COUNT(*) AS cust_count
+        FROM
+          customers
+        GROUP BY
+          DATE_FORMAT(subscriptionDate, '%Y-%m')
+      ) t1
+    ORDER BY
+      month
+    ";
 
-              </div>
-            </div><!-- End Reports -->
+
+    $resultCustCountsByMonth = mysqli_query($conn, $sqlCustCountsByMonth);
+
+    if (!$resultCustCountsByMonth) {
+      die("Invalid query: " . $conn->error);
+    }
+
+    $custCountsByMonth = array();
+    
+    while ($rowCustCount = mysqli_fetch_assoc($resultCustCountsByMonth)) {
+      $month = $rowCustCount['month'];
+      $custCount = $rowCustCount['cumulative_count'];
+      $custCountsByMonth[$month] = $custCount;
+    }
+    
+
+      
+      // count equipments
+
+      $sqlEquipCountsByMonth = "
+        SELECT
+          DATE_FORMAT(addingDate, '%Y-%m') AS month,
+          COUNT(*) AS equip_count
+        FROM
+          equipments
+        GROUP BY
+          DATE_FORMAT(addingDate, '%Y-%m')
+        ORDER BY
+          DATE_FORMAT(addingDate, '%Y-%m')
+      ";
+
+      $resultEquipCountsByMonth = mysqli_query($conn, $sqlEquipCountsByMonth);
+
+      if (!$resultEquipCountsByMonth) {
+        die("Invalid query: " . $conn->error);
+      }
+
+      $equipCountsByMonth = array();
+      
+      while ($rowEquipCount = mysqli_fetch_assoc($resultEquipCountsByMonth)) {
+        $month = $rowEquipCount['month'];
+        $equipCount = $rowEquipCount['equip_count'];
+        $equipCountsByMonth[$month] = $equipCount;
+      }
+      
+// $sqlUpEquipCountsByMonth="
+// SELECT
+// DATE_FORMAT(latestDownDate, '%Y-%m') AS month,
+// COUNT(*) AS up_equip_count Where status='up'
+// FROM
+// equipments
+// GROUP BY
+// DATE_FORMAT(latestDownDate, '%Y-%m')
+// ORDER BY
+// DATE_FORMAT(latestDownDate, '%Y-%m')
+// ";
+// $resultUpEquipCountsByMonth=mysqli_query($conn,$sqlUpEquipCountsByMonth);
+// if (!$resultUpEquipCountsByMonth) {
+//   die("Invalid query: " . $conn->error);
+// }
+
+// $upEquipCountsByMonth = array();
+
+// while ($rowUpEquipCount = mysqli_fetch_assoc($resultUpEquipCountsByMonth)) {
+//   $month = $rowUpEquipCount['month'];
+//   $upEquipCount = $rowEquipCount['up_equip_count'];
+//   $upEquipCountsByMonth[$month] = $equipCount;
+// }
+
+      // $sqlUpequip = "SELECT count(*) AS Upequip_count FROM equipments WHERE status='up'";
+      // $resultUpequip = mysqli_query($conn, $sqlUpequip);
+
+      // if (!$resultUpequip) {
+      //   die("Invalid query: " . $conn->error);
+      // }
+
+      // $rowcust = mysqli_fetch_assoc($resultcust);
+      // $rowUpequip = mysqli_fetch_assoc($resultUpequip);
+      ?>
+
+      // Convert the PHP associative array to JavaScript object
+      const equipCountsByMonth = <?php echo json_encode($equipCountsByMonth); ?>;
+      const custCountsByMonth = <?php echo json_encode($custCountsByMonth); ?>;
+      
+
+      // Extract the month names and equipment counts from the JavaScript object
+      const monthNames = Object.keys(equipCountsByMonth);
+      const equipCounts = Object.values(equipCountsByMonth);
+      const custCounts = Object.values(custCountsByMonth);
+     
+
+      // JavaScript code to render the chart
+      new ApexCharts(document.querySelector("#reportsChart"), {
+        series: [{
+          name: 'Equipments',
+          data: equipCounts,
+        }, {
+          name: 'Customers',
+          data: custCounts,
+        }],
+        chart: {
+          height: 350,
+          type: 'area',
+          toolbar: {
+            show: false
+          },
+        },
+        xaxis: {
+          type: 'category',
+          categories: monthNames,
+        },
+        tooltip: {
+          x: {
+            format: 'yyyy-MM',
+          },
+        }
+      }).render();
+    });
+  </script>
+
+
+
+
+
+
+<!-- End Line Chart -->
+
+</div>
+
+</div>
+</div><!-- End Reports -->
+
 
            </div>
         </div><!-- End Left side columns -->
