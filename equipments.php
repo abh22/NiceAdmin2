@@ -58,62 +58,7 @@
           <!-- Left side columns -->
           <div class="col-lg-8">
             <div class="row">
-              <!-- Equipments Card -->
-              <div class="col-xxl-4 col-md-6">
-                <div class="card info-card equipments-card">
-                  <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"
-                      ><i class="bi bi-three-dots"></i
-                    ></a>
-                    <ul
-                      class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
-                    >
-                      <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                      </li>
-
-                             
-  
-  <li><a  class="dropdown-item" href="#">Type</a></li>
-     
-      
-   
-  
-
-
-                    
-                      <li><a  class="dropdown-item" href="#">Client</a></li>
-                      <li><a style="color: rgb(191, 4, 4);" class="dropdown-item" href="#">Status Down</a></li>
-                    </ul>
-                  </div>
-                  <a href="./equipments.php" target="_blank">
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        Equips <span>| All</span>
-                      </h5>
-
-                      <div class="d-flex align-items-center">
-                        <div
-                          class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                        >
-                          <i class="bi bi-router"></i>
-                        </div>
-                        <div class="ps-3">
-                          <h6>#</h6>
-                          <span class="text-success small pt-1 fw-bold"
-                            >Total</span
-                          >
-                          <span class="text-muted small pt-2 ps-1"
-                            >1200</span
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              <!-- End Equipments Card -->
-            
+             
 <!-- displaying equipments-->
 <table class="table" >
   <thead>
@@ -189,6 +134,7 @@ while($row = $result->fetch_assoc()) {
         </div>
       </section>
     </main>
-    <div id="footer"></div>
+    <div class="col-lg-8">
+    <div id="footer"></div></div>
   </body>
 </html>

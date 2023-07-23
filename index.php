@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard - TT</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -120,7 +120,11 @@
                         $data=mysqli_num_rows($result);
                         echo $data;
                       ?></h6>
-                      <span class="text-success small pt-1 fw-bold">#%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <span class="text-success small pt-1 fw-bold"><?php $select = "SELECT * FROM equipments WHERE status='up'";
+                        $resultUP = mysqli_query($conn, $select);
+                        $dataUP=mysqli_num_rows($resultUP);
+                        echo number_format($dataUP/$data *100, 1);
+                        "#%" ?></span> <span class="text-muted small pt-2 ps-1">% connected</span>
 
                     </div>
                   </div>

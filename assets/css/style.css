@@ -608,12 +608,20 @@ input[type="checkbox"]
 .header-nav .profile .dropdown-item:hover {
   background-color: #f6f9ff;
 }
+.table{
+  margin-top: 50px;
+}
+
 table tr.red-row {
   background-color: red;
 }
-.btn-group{
-  padding: 50px;
+.btn-group-filter{
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+  
 }
+
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
@@ -649,11 +657,14 @@ table tr.red-row {
   background-color: #aab7cf;
 }
 
+
 @media (min-width: 1200px) {
 
   #main,
   #footer {
     margin-left: 300px;
+   
+    
   }
 }
 
@@ -1240,6 +1251,8 @@ table tr.red-row {
   font-size: 14px;
   transition: all 0.3s;
   border-top: 1px solid #cddfff;
+  bottom: 0;
+  
 }
 
 .footer .copyright {

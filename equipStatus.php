@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TT</title>
     
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -37,11 +37,20 @@
   <div id="side"></div>
   <main id="main" class="main">
   <section class="section dashboard">
+  <div class="btn-group-filter">
   <div class="col-lg-4">
+   
 <div  class="btn-group" role="group" aria-label="Basic example">
   <button type="button"  class="btn btn-primary" id="btnUp" data-toggle="button">UP</button>
   <button type="button"  class="btn btn-secondary" id="btnDown" data-toggle="button" checked>DOWN</button>
  
+</div>
+<div  class="btn-group" role="group" aria-label="Basic example">
+  <button type="button"  class="btn btn-primary" id="all" data-toggle="button">All</button>
+  <button type="button"  class="btn btn-secondary" id="routers" data-toggle="button" checked>Routers</button>
+  <button type="button"  class="btn btn-secondary" id="switches" data-toggle="button" checked>Switches</button>
+ 
+</div>
 </div>
 </div>
 <div class="col-lg-8">
@@ -76,7 +85,7 @@
       ?>
       
       <!-- HTML table to display data -->
-      <table class="table">
+      <table class=" table table-status">
         <thead>
           <!-- Table header -->
           <tr>
@@ -156,10 +165,10 @@
 
 
 
-
+      
 
     </div>
-      </section>
+</section>
 </main>
    
     <div class="col-lg-8">
