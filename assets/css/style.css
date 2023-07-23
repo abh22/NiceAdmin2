@@ -608,7 +608,12 @@ input[type="checkbox"]
 .header-nav .profile .dropdown-item:hover {
   background-color: #f6f9ff;
 }
-
+table tr.red-row {
+  background-color: red;
+}
+.btn-group{
+  padding: 50px;
+}
 /*--------------------------------------------------------------
 # Sidebar
 --------------------------------------------------------------*/
