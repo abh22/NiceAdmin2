@@ -1,5 +1,6 @@
 import os
 import datetime
+import time
 import pymysql
 
 
@@ -34,7 +35,7 @@ def check_ping_status(equipData,connection):
             for equip in equipData:
                 print ("equip[0]", equip[0])
                 hostname= equip[4] 
-                response = os.system("ping " + hostname)  # Sends 4 ping packets
+                response = os.system("ping -n 1 " + hostname)  
     
                 if response == 0:
                     print(f"{hostname} is up")
@@ -52,8 +53,10 @@ def updateStatus(status, connection, equip):
         with connection.cursor() as cursor:
             sql = "UPDATE equipments SET status = %s WHERE id = %s"
             sqlDownDate = "UPDATE equipments SET latestDownDate = %s WHERE id = %s"
+            sqlDownDateMs = "UPDATE equipments SET latestDownDateMs = %s WHERE id = %s"
             cursor.execute(sql, (status, equip[0]))
             cursor.execute(sqlDownDate, (datetime.datetime.now(), equip[0]))
+            cursor.execute(sqlDownDateMs, (int(time.time()*1000), equip[0]))
 
             connection.commit()  # Commit the changes to the database
             print("Status updated successfully!")

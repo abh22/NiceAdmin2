@@ -36,21 +36,34 @@
 <div id="header"></div>
   <div id="side"></div>
   <main id="main" class="main">
+  <div class="pagetitle">
+      
+      <h1>Dashboard</h1>
+      
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Equipments status</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
   <section class="section dashboard">
-  <div class="btn-group-filter">
+  
+  <!-- <div class="btn-group-filter">
+ 
   <div class="col-lg-4">
    
 <div  class="btn-group" role="group" aria-label="Basic example">
   <button type="button"  class="btn btn-primary" id="btnUp" data-toggle="button">UP</button>
   <button type="button"  class="btn btn-secondary" id="btnDown" data-toggle="button" checked>DOWN</button>
  
-</div>
-<div  class="btn-group" role="group" aria-label="Basic example">
+</div> -->
+<!-- <div  class="btn-group" role="group" aria-label="Basic example">
   <button type="button"  class="btn btn-primary" id="all" data-toggle="button">All</button>
   <button type="button"  class="btn btn-secondary" id="routers" data-toggle="button" checked>Routers</button>
   <button type="button"  class="btn btn-secondary" id="switches" data-toggle="button" checked>Switches</button>
  
-</div>
+</div> -->
 </div>
 </div>
 <div class="col-lg-8">
@@ -69,21 +82,16 @@
      
       
       
-      $sqlUp = "SELECT * FROM equipments WHERE status ='up'";
-      $resultUp = mysqli_query($conn, $sqlUp);
+      $sql = "SELECT * FROM equipments ORDER BY status";
+      $result = mysqli_query($conn, $sql);
       
-      if (!$resultUp) {
+      if (!$result) {
         die("Invalid query: " . mysqli_error($conn));
       }
       
-      $sqlDown = "SELECT * FROM equipments WHERE status ='down'";
-      $resultDown = mysqli_query($conn, $sqlDown);
-      
-      if (!$resultDown) {
-        die("Invalid query: " . mysqli_error($conn));
-      }
+     
       ?>
-      
+        
       <!-- HTML table to display data -->
       <table class=" table table-status">
         <thead>
@@ -100,66 +108,71 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Table rows for "DOWN" status -->
+      
+          <!-- Table rows  -->
           <?php
-          while ($row = mysqli_fetch_assoc($resultDown)) {
-            echo '<tr class="table-danger">';
+          function timeDiff($milliseconds) {
+            // Convert milliseconds to seconds
+            $seconds = $milliseconds / 1000;
+        
+            // Calculate the components
+            $days = floor($seconds / (60 * 60 * 24));
+            $seconds %= (60 * 60 * 24);
+            $hours = floor($seconds / (60 * 60));
+            $seconds %= (60 * 60);
+            $minutes = floor($seconds / 60);
+            $seconds %= 60;
+        
+            // Build the result string
+           
+            if ($days > 0) {
+                return "$days day" . ($days > 1 ? 's' : '') . ' ago ';
+            }
+            
+            if ($hours > 0) {
+               return "$hours hour" . ($hours > 1 ? 's' : '') . ' ago';
+            }
+            if ($minutes > 0) {
+               return "$minutes minute" . ($minutes > 1 ? 's' : '') . ' ago ';
+            }
+            return "$seconds second" . ($seconds > 1 ? 's' : '' ) . " ago";
+        
+            
+        }
+        
+          while ($row = mysqli_fetch_assoc($result)) {
+            if($row["status"]=='down')
+            {echo '<tr class="table-danger">';}
+            else{echo '<tr class="table-success">';}
+
+            $currentTime= time()*1000;
             echo "<td>" . $row["id"] . "</td>
                   <td>" . $row["type"] . "</td>
                   <td>" . $row["brand"] . "</td>
                   <td>" . $row["model"] . "</td>
                   <td>" . $row["IPaddress"] . "</td>
                   <td>" . $row["client"] . "</td>
-                  <td>" . $row["latestDownDate"] . "</td>
+                  <td>" . timeDiff($currentTime-$row["latestDownDateMs"]). "</td>
+                
                   <td>
-                    <a class='btn btn-primary btn-sm' href='updateEquip.php?id=" . $row["id"] . "'>Update</a>
-                    <a class='btn btn-danger btn-sm' href='deleteEquip.php?id=" . $row["id"] . "'>Delete</a>
+                    <a class='btn btn-primary btn-sm' href='updateEquip.php?id=" . $row["id"] . "'>History</a>
+                    
                   </td>
                 </tr>";
+               
+
+
           }
           ?>
       
-          <!-- Table rows for "UP" status (hidden by default) -->
-          <?php
-          while ($row = mysqli_fetch_assoc($resultUp)) {
-            echo '<tr class="table-success" style="display: none;">';
-            echo "<td>" . $row["id"] . "</td>
-                  <td>" . $row["type"] . "</td>
-                  <td>" . $row["brand"] . "</td>
-                  <td>" . $row["model"] . "</td>
-                  <td>" . $row["IPaddress"] . "</td>
-                  <td>" . $row["client"] . "</td>
-                  <td>" . $row["latestDownDate"] . "</td>
-                  <td>
-                    <a class='btn btn-primary btn-sm' href='updateEquip.php?id=" . $row["id"] . "'>Update</a>
-                    <a class='btn btn-danger btn-sm' href='deleteEquip.php?id=" . $row["id"] . "'>Delete</a>
-                  </td>
-                </tr>";
-          }
-          ?>
+      
+          
+          
         </tbody>
       </table>
       
-      <!-- JavaScript/jQuery code to handle button clicks -->
-      <script>
-        $(document).ready(function() {
-          // Default: Show data for DOWN status (hide UP status rows)
-          $(".table-success").hide();
+     
       
-          // Button click handlers
-          $("#btnUp").click(function() {
-            // Show data for UP status (hide DOWN status rows)
-            $(".table-danger").hide();
-            $(".table-success").show();
-          });
-      
-          $("#btnDown").click(function() {
-            // Show data for DOWN status (hide UP status rows)
-            $(".table-success").hide();
-            $(".table-danger").show();
-          });
-        });
-      </script>
       
 
 

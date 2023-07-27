@@ -53,6 +53,18 @@
     <div id="header"></div>
     <div id="side"></div>
     <main id="main" class="main">
+      
+    <div class="pagetitle">
+      
+      <h1>Dashboard</h1>
+      
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item active">Equipments</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
       <section class="section dashboard">
         <div class="row">
           <!-- Left side columns -->
@@ -115,26 +127,14 @@ while($row = $result->fetch_assoc()) {
             </div>
           </div>
           <div class="col-lg-4">
-            <div
-              style="
-                font-size: 25px;
-                padding: 30px;
-                font-family: 'Lucida Sans', 'Lucida Sans Regular',
-                  'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
-                  sans-serif;
-              "
-            >
-              <a href="#addequip">
-                <i class="bi bi-plus-square-fill"></i>
-                Add Equipment
-              </a>
-            </div>
+           
             <div id="rightside"></div>
           </div>
         </div>
       </section>
     </main>
     <div class="col-lg-8">
-    <div id="footer"></div></div>
+       
+  <div id="footer"></div></div>
   </body>
 </html>

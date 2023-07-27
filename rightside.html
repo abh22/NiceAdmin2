@@ -54,8 +54,11 @@
               
               
                 <div id="dataDisplay"></div>
-              
+              <script src="timeDiff.js"></script>
                 <script>
+
+
+                  
                   const apiUrl = "api.php"; // Replace with the correct API endpoint
               
                   // Function to fetch data from the API and display it on the webpage
@@ -67,10 +70,10 @@
                         let html = "";
               
                         data.forEach(item => {
-                          
+                          console.log(item);
                           html += `
                             <div class="activity-item d-flex">
-                              <div class="activite-label"> ${item.latestDownDate}</div>
+                              <div class="activite-label"> ${timeDiff(Date.now() - item.latestDownDateMs)}</div>
                               <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                               <div class="activity-content">
                

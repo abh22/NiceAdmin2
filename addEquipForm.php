@@ -121,19 +121,34 @@ while($row = $result->fetch_assoc()) {
                 </div>
                 <div class="col-8">
                   <label for="client" class="form-label"
-                    >Associated client</label
-                  >
-                  <input
-                    type="text"
-                    name="client"
-                    class="form-control"
-                    id="client"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please confirm your client!
-                  </div>
-                </div>
+                    >Associated client</label>
+                  
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      <option selected>--</option>
+                      <?php
+      $conn = new mysqli('localhost', 'root', '', 'stage01');
+      if ($conn->connect_error) {
+          die('Connection failed: ' . $conn->connect_error); 
+      }
+
+     
+
+      // read all row from database table
+$sql = "SELECT * FROM customers";
+$result = mysqli_query($conn,$sql);
+
+      if (!$result) {
+  die("Invalid query: " . $connection->error);
+}
+
+      // read data of each row
+while($row = $result->fetch_assoc()) {
+  echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
+}
+        $conn->close();
+        ?>
+    </select>
+                    </div>
                 <div class="col-8">
                       <label for="yourPassword" class="form-label">Login</label>
                       <input type="text" name="login" class="form-control" id="log" required>

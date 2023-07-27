@@ -9,7 +9,7 @@ $conn = new mysqli('localhost', 'root', '', 'stage01');
 header("Content-Type: application/json");
 
 // API endpoint to retrieve data from the database (you can customize this query as per your database structure)
-$sql = "SELECT * FROM equipments WHERE status='down'";
+$sql = "SELECT * FROM equipments WHERE status='down' LIMIT 10";
 $result = $conn->query($sql);
 
 if (!$result) {

@@ -35,6 +35,8 @@
 <div id="header"></div>
   <div id="side"></div>
   <main id="main" class="main">
+    
+  
 <!-- adding customer form-->
 <div class="col-lg-8">
 <form id="addcust" style="padding: 50px;" action="addcust.php" method="post" class="row g-3 needs-validation" novalidate>
@@ -59,31 +61,11 @@
 
                     <div class="col-8">
                       <label for="name" class="form-label">Name</label>
-                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
-                      <option selected>--</option>
-                      <?php
-      $conn = new mysqli('localhost', 'root', '', 'stage01');
-      if ($conn->connect_error) {
-          die('Connection failed: ' . $conn->connect_error); 
-      }
-
-     
-
-      // read all row from database table
-$sql = "SELECT * FROM customers";
-$result = mysqli_query($conn,$sql);
-
-      if (!$result) {
-  die("Invalid query: " . $connection->error);
-}
-
-      // read data of each row
-while($row = $result->fetch_assoc()) {
-  echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
-}
-        $conn->close();
-        ?>
-    </select>
+                      <div class="input-group has-validation">
+                        
+                        <input type="text" name="name" class="form-control" id="ref" required>
+                        <div class="invalid-feedback">Please insert a name.</div>
+                      </div>
                     </div>
 
                     <div class="col-8">
@@ -101,19 +83,10 @@ while($row = $result->fetch_assoc()) {
                       </div>
                       <div class="col-8">
                       <label for="address" class="form-label">Address</label>
-                      <input type="text" name="address" class="form-control" id="address" required>
-                      <div class="invalid-feedback">Please enter an address </div>
+                      <input type="text" name="address" class="form-control" id="address" >
+                      
                     </div>
-                    <div class="col-8">
-                      <label for="yourPassword" class="form-label">Login</label>
-                      <input type="text" name="login" class="form-control" id="log" required>
-                      <div class="invalid-feedback">Please enter your login </div>
-                    </div>
-                    <div class="col-8">
-                      <label for="yourPassword" class="form-label"> Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter password </div>
-                    </div>
+                    
                     <div class="col-12">
                         <button class="btn btn-primary w-40" name="add" type="submit">Add customer</button>
                       </div>

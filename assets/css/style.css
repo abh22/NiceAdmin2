@@ -617,6 +617,7 @@ table tr.red-row {
 }
 .btn-group-filter{
   padding: 40px;
+ 
   display: flex;
   flex-direction: row;
   
@@ -834,6 +835,7 @@ table tr.red-row {
 /* Info Cards */
 .dashboard .info-card {
   padding-bottom: 10px;
+  height: 200px;
 }
 
 .dashboard .info-card h6 {
