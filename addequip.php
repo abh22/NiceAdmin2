@@ -1,7 +1,10 @@
 
 <?php
 
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Get the selected value from the form
+    if (isset($_POST["type"]) && isset($_POST["brand"])&& isset($_POST["model"]) ) {
+       
     
     $conn = new mysqli('localhost', 'root', '', 'stage01');
     if ($conn->connect_error) {
@@ -26,7 +29,10 @@
             echo "invalid query";
             
         }
-        
+        $insertLog = "INSERT INTO historylog (ip) VALUES ('$ip')";
+        $resultLog=mysqli_query($conn, $insertLog);
+        if(!$resultLog){
+            echo "invalid query";}
         echo "<script>
         alert('Added equipment');
         window.location.href='equipments.php';
@@ -34,5 +40,5 @@
        
         exit();
     }
-
+    }}
 ?>

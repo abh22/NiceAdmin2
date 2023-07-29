@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD']== 'GET'){
         exit;
     }
     $id=$_GET["id"];
-    $sql = "SELECT * FROM customers";
+    $sql = "SELECT * FROM customers WHERE id ='$id'";
     $result = mysqli_query($conn,$sql);
     $row=$result->fetch_assoc();
 if(!$row){

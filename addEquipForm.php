@@ -58,8 +58,8 @@
                 <div class="col-8">
                       <label for="name" class="form-label">Equipment type</label>
                       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="type" id="name">
-                      <option value="1">Router</option>
-                      <option value="2">Switch</option>
+                      <option value="Router">Router</option>
+                      <option value="Switc">Switch</option>
     </select>
     </div>
     <div class="col-8">
@@ -87,14 +87,14 @@ $result1 = mysqli_query($conn,$sql1);
 
       // read data of each row
 while($row = $result->fetch_assoc()) {
-  echo "<option value='" . $row["id"] . "'>" . $row["brand"] . "</option>";
+  echo "<option value='" . $row["brand"] . "'>" . $row["brand"] . "</option>";
 }
   echo "</select>";
   echo '<div class="col-8">';
  echo '<label for="name" class="form-label">Model</label>';
  echo ' <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="model" id="model">';
  while($row1 = $result1->fetch_assoc()) {
-  echo "<option value='" . $row1["id"] . "'>" . $row1["model"] . "</option>";}
+  echo "<option value='" . $row1["model"] . "'>" . $row1["model"] . "</option>";}
   echo '</select>';
     
 
@@ -123,7 +123,7 @@ while($row = $result->fetch_assoc()) {
                   <label for="client" class="form-label"
                     >Associated client</label>
                   
-                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="client" id="name">
                       <option selected>--</option>
                       <?php
       $conn = new mysqli('localhost', 'root', '', 'stage01');
@@ -143,7 +143,7 @@ $result = mysqli_query($conn,$sql);
 
       // read data of each row
 while($row = $result->fetch_assoc()) {
-  echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
+  echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
 }
         $conn->close();
         ?>
