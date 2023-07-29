@@ -94,6 +94,7 @@ class="main"
     <input
       type="text"
       value="<?php echo $type;?>"
+      readonly
       name="type"
       placeholder="Router,Switcher.."
       class="form-control"
@@ -110,6 +111,7 @@ class="main"
     <input
       type="text"
       value="<?php echo $brand;?>"
+      readonly
       name="brand"
       placeholder="Example: Cisco"
       class="form-control"
@@ -124,6 +126,7 @@ class="main"
       <input
         type="text"
         value="<?php echo $model;?>"
+        readonly
         name="model"
         class="form-control"
         id="ref"
@@ -150,21 +153,38 @@ class="main"
     <label for="client" class="form-label"
       >Associated client</label
     >
-    <input
-      type="text"
-      value="<?php echo $client;?>"
-      name="client"
-      class="form-control"
-      id="client"
-      required
-    />
+    
     <div class="invalid-feedback">
       Please confirm your client!
     </div>
   </div>
   <div class="col-8">
     <label for="yourPassword" class="form-label"
-      >Password</label
+      ><select class="form-select form-select-sm" aria-label=".form-select-sm example" name="client" id="name">
+                      <option selected><?php echo $client;?></option>
+                      <?php
+      $conn = new mysqli('localhost', 'root', '', 'stage01');
+      if ($conn->connect_error) {
+          die('Connection failed: ' . $conn->connect_error); 
+      }
+
+     
+
+      // read all row from database table
+$sql = "SELECT * FROM customers";
+$result = mysqli_query($conn,$sql);
+
+      if (!$result) {
+  die("Invalid query: " . $connection->error);
+}
+
+      // read data of each row
+while($row = $result->fetch_assoc()) {
+  echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+}
+        $conn->close();
+        ?>
+    </select>Password</label
     >
     <input
       type="password"
