@@ -201,10 +201,12 @@ if(mysqli_num_rows($result) ==0){
               if ($row["status"] == 'down') {
                 echo '<tr class="table-danger">';
                 echo '<td> <i class="bi bi-exclamation-circle"></i></td>';
-              } else {
+              } elseif($row["status"] == 'up') {
                 echo '<tr class="table-success">';
                 echo '<td> <i class="bi bi-check2-circle"></i> </td>';
               }
+else{echo '<tr class="table-secondary" >';
+  echo '<td> <i class="bi bi-question-circle"></i> </td> ';}
 
               $currentTime = time() * 1000;
               echo "<td>" . $row["id"] . "</td>
@@ -213,7 +215,8 @@ if(mysqli_num_rows($result) ==0){
                   <td>" . $row["model"] . "</td>
                   <td>" . $row["IPaddress"] . "</td>
                   <td>" . $row["client"] . "</td>
-                  <td>" . timeDiff($currentTime - $row["latestDownDateMs"]) . "</td>
+                  <td>"; echo is_null($row["latestDownDateMs"]) ? "null" : timeDiff($currentTime - (int)$row["latestDownDateMs"]); echo "</td>
+
                 
                   <td>
                     <a class='btn btn-primary btn-sm' href='updateEquip.php?id=" . $row["id"] . "'> View History</a>

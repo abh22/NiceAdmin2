@@ -136,7 +136,7 @@ do{
                     </div>
                     
                     <div class="col-12">
-                        <button class="btn btn-primary w-40" name="add" type="submit">Add customer</button>
+                        <button class="btn btn-primary w-40" name="add" type="submit">Update </button>
                       </div>
     </form>
     </div>
