@@ -616,11 +616,11 @@ table tr.red-row {
   background-color: red;
 }
 .btn-group-filter{
-  padding: 40px;
- 
+  padding: 10px;
+ margin:0;
   display: flex;
-  flex-direction: row;
-  
+  flex-direction: row !important;
+ gap: 10px;
 }
 
 /*--------------------------------------------------------------

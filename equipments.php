@@ -81,6 +81,7 @@
   <th>Model</th>
   <th>IP address</th>
   <th>Client</th>
+  <th>Actions</th>
 
 </tr>
 </thead>

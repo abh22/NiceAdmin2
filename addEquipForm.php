@@ -57,14 +57,14 @@
                 <h3 style="color: blue">Add equipment</h3>
                 <div class="col-8">
                       <label for="name" class="form-label">Equipment type</label>
-                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="type" id="name">
                       <option value="1">Router</option>
                       <option value="2">Switch</option>
     </select>
     </div>
     <div class="col-8">
                       <label for="name" class="form-label">Brand</label>
-                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="Name" id="name">
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="brand" id="name">
                       
                       
                 <?php
