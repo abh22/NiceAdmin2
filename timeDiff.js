@@ -3,7 +3,7 @@ function timeDiff(timeDifferenceInMilliseconds){
 
     let timeDifferenceText;
     if (timeDifferenceInMilliseconds<60000) {
-        timeDifferenceText = ` Few seconds ago`;
+        timeDifferenceText = `seconds ago`;
         return timeDifferenceText;
     }
     if (timeDifferenceInMilliseconds >= 86400000) {  
@@ -14,7 +14,7 @@ function timeDiff(timeDifferenceInMilliseconds){
       timeDifferenceText = `${hoursDifference} hour${hoursDifference !== 1 ? 's' : ''} ago`;
     } else {
       const minutesDifference = Math.floor(timeDifferenceInMilliseconds / 60000);
-      timeDifferenceText = `${minutesDifference} minute${minutesDifference !== 1 ? 's' : ''} ago`;
+      timeDifferenceText = `${minutesDifference} min${minutesDifference !== 1 ? 's' : ''} ago`;
     }
       return timeDifferenceText;
     }

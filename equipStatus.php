@@ -219,7 +219,7 @@ else{echo '<tr class="table-secondary" >';
 
                 
                   <td>
-                    <a class='btn btn-primary btn-sm' href='updateEquip.php?id=" . $row["id"] . "'> View History</a>
+                    <a class='btn btn-primary btn-sm' href='viewHistory.php?id=$row[id]'> View History</a>
                     
                   </td>
                 </tr>";
