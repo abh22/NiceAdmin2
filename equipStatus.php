@@ -215,12 +215,13 @@ else{echo '<tr class="table-secondary" >';
                   <td>" . $row["model"] . "</td>
                   <td>" . $row["IPaddress"] . "</td>
                   <td>" . $row["client"] . "</td>
-                  <td>"; echo is_null($row["latestDownDateMs"]) ? "null" : timeDiff($currentTime - (int)$row["latestDownDateMs"]); echo "</td>
+                  <td>"; echo is_null($row["latestDownDateMs"]) ? "null" : timeDiff($currentTime - (int)$row["latestDownDateMs"]); 
+                  echo "</td>";
 
                 
-                  <td>
-                    <a class='btn btn-primary btn-sm' href='viewHistory.php?id=$row[id]'> View History</a>
-                    
+                  echo "<td>
+                 
+                    <a class='btn btn-primary btn-sm' href='viewHistory.php?id=$row[id]'> View History</a> 
                   </td>
                 </tr>";
 

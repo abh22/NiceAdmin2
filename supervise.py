@@ -3,6 +3,7 @@ import datetime
 import time
 import pymysql
 import json
+import requests
 
 
 
@@ -94,17 +95,17 @@ def updateStatus(status, connection, equip):
                 # was up but just fallen down
                 elif ((json_length == json_length_recovery)  and status == "down"):
 
-                    data_dict[str(datetime.datetime.now())] = int(time.time() * 1000)
+                    data_dict[len(data_dict)] = str(datetime.datetime.now())
                     json_data = json.dumps(data_dict)
                     sqlLog = "UPDATE historylog SET latestDownDate = %s WHERE ip = %s"
                     cursor.execute(sqlLog, (json_data, equip[4]))
                      #  update equipments table
                     sql = "UPDATE equipments SET status = %s WHERE id = %s"
                     sqlDownDate = "UPDATE equipments SET latestDownDate = %s WHERE id = %s"
-                    sqlDownDateMs = "UPDATE equipments SET latestDownDateMs = %s WHERE id = %s"
+                    
                     cursor.execute(sql, (status, equip[0]))
                     cursor.execute(sqlDownDate, (datetime.datetime.now(), equip[0]))
-                    cursor.execute(sqlDownDateMs, (int(time.time()*1000), equip[0]))
+                   
                 else:
                     print("No update")
             
@@ -120,7 +121,7 @@ def updateStatus(status, connection, equip):
                     
 
                 # Add the new key-value pair to the dictionary
-                    data_dict[str(datetime.datetime.now())] = int(time.time() * 1000)
+                    data_dict[len(data_dict)] = str(datetime.datetime.now())
 
                         # INSERT INTO my_table (data_column) VALUES ('{"key1": "value1", "key2": "value2", "key3": "value3"}');
                     
@@ -130,10 +131,10 @@ def updateStatus(status, connection, equip):
                      #  update equipments table
                     sql = "UPDATE equipments SET status = %s WHERE id = %s"
                     sqlDownDate = "UPDATE equipments SET latestDownDate = %s WHERE id = %s"
-                    sqlDownDateMs = "UPDATE equipments SET latestDownDateMs = %s WHERE id = %s"
+                    
                     cursor.execute(sql, (status, equip[0]))
                     cursor.execute(sqlDownDate, (datetime.datetime.now(), equip[0]))
-                    cursor.execute(sqlDownDateMs, (int(time.time()*1000), equip[0]))
+                    
 
                                     
             connection.commit()  # Commit the changes to the database
@@ -158,7 +159,7 @@ def main():
         if equipment_data:
             # Supervise equipment status
            check_ping_status(equipment_data,connection)
-
+        x=requests.get("http://localhost/NiceAdmin2/mbtf.php")
         connection.close()
     else:
         print("Exiting script due to database connection error.")
